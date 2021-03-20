@@ -50,37 +50,31 @@ describe("combineLatest", ({testAsync, beforeEach, afterEach}) => {
   })
 
   testAsync("tbd3", ({expect, callback}) => {
-    let {spy, toBeCalledTimes, lastCalledWith} = makeSpy(expect)
-    let {source, next} = Wonka.makeSubject()
+    let {spy, toBeCalledTimes, toBeCalledWith} = makeSpy(expect)
+    let subject1 = Wonka.makeSubject()
+    let subject2 = Wonka.makeSubject()
 
-    let promise500 = makePromise(500)
     let promise200 = makePromise(200)
 
     Wonka.fromPromise(promise200(1))
-    |> Wonka.mergeMap((. value) => {
-      WonkaExtras.combineLatest([Wonka.fromPromise(promise500(value)), source])
+    |> Wonka.switchMap((. value) => {
+      WonkaExtras.combineLatest([Wonka.fromValue(value), subject1.source, subject2.source])
     })
     |> Wonka.forEach(spy)
 
-    advanceTimersByTime(2000)
-    next(2)
-    advanceTimersByTime(2000)
-
-    next(3)
-    advanceTimersByTime(2000)
+    advanceTimersByTime(200)
 
     flushPromises(() => {
-      toBeCalledTimes(2)
-      // lastCalledWith([1, 2])
-      callback()
-      // next(3)
-      // advanceTimersByTime(700)
+      subject1.next(2)
 
-      // flushPromises(() => {
-      //   toBeCalledTimes(2)
-      //   lastCalledWith([1, 3])
-      //   callback()
-      // })
+      toBeCalledTimes(0)
+
+      subject2.next(3)
+      subject1.next(4)
+
+      toBeCalledTimes(2)
+      toBeCalledWith([[1, 2, 3], [1, 4, 3]])
+      callback()
     })
   })
 })
