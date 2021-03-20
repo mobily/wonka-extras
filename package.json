@@ -1,0 +1,43 @@
+{
+  "name": "@mobily/wonka-extras",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn rollup -c rollup.config.js && yarn generate:flow",
+    "clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
+    "test": "yarn jest --coverage",
+    "re:clean": "yarn bsb -clean-world",
+    "re:build": "yarn bsb -make-world",
+    "re:dev": "yarn bsb -make-world -w",
+    "generate:flow": "node ./scripts/generate-flow-files.js",
+    "generate:contributors": "yarn all-contributors generate"
+  },
+  "keywords": [
+    "wonka",
+    "rescript",
+    "typescript",
+    "observable",
+    "iterable",
+    "stream"
+  ],
+  "author": "Marcin Dziewulski <hello@mobily.pl>",
+  "homepage": "https://github.com/mobily/wonka-extras",
+  "bugs": "https://github.com/mobily/wonka-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mobily/wonka-extras.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "wonka": "^4.0.15"
+  },
+  "devDependencies": {
+    "bs-platform": "^9.0.2",
+    "gentype": "^3.44.0",
+    "jest": "^26.6.3",
+    "reason-test-framework": "^0.3.2"
+  }
+}
