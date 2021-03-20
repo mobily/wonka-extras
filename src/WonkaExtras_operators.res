@@ -46,10 +46,10 @@ let reduce = (fn: (. 'b, 'a) => 'b, initial: 'b): operatorT<'a, 'b> =>
   })
 
 @gentype
-let timeoutWith = (rescueFn: (. unit) => sourceT<'b>, timeout: int): operatorT<'a, 'b> =>
+let timeoutWith = (rescueFn: (. unit) => sourceT<'b>, ms: int): operatorT<'a, 'b> =>
   curry(source => {
     let shared = share(source)
-    let timer = interval(timeout) |> take(1)
+    let timer = interval(ms) |> take(1)
 
     merge([
       shared |> takeUntil(timer),
@@ -103,6 +103,9 @@ let distinctUntilChanged = (comparatorFn: (. 'a, 'a) => bool): operatorT<'a, 'a>
     |> concatAll
   })
 
-let takeArray = () => {
-  ()
+@gentype
+let toArrayO = (source: sourceT<'a>): sourceT<array<'a>> => {
+  let shared = share(source)
+
+  shared |> reduce((. acc, value) => Belt.Array.concat(acc, [value]), [])
 }
