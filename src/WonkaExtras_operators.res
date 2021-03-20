@@ -104,8 +104,28 @@ let distinctUntilChanged = (comparatorFn: (. 'a, 'a) => bool): operatorT<'a, 'a>
   })
 
 @gentype
-let toArrayO = (source: sourceT<'a>): sourceT<array<'a>> => {
+let takeArray = (source: sourceT<'a>): sourceT<array<'a>> => {
   let shared = share(source)
-
   shared |> reduce((. acc, value) => Belt.Array.concat(acc, [value]), [])
 }
+
+@gentype
+let mapTo = (value: 'b): operatorT<'a, 'b> =>
+  curry(source => {
+    let shared = share(source)
+    shared |> map((. _) => value)
+  })
+
+@gentype
+let switchMapTo = (sndSource: sourceT<'b>): operatorT<'a, 'b> =>
+  curry(source => {
+    let shared = share(source)
+    shared |> switchMap((. _) => sndSource)
+  })
+
+@gentype
+let concatMapTo = (sndSource: sourceT<'b>): operatorT<'a, 'b> =>
+  curry(source => {
+    let shared = share(source)
+    shared |> concatMap((. _) => sndSource)
+  })

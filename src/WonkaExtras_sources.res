@@ -33,7 +33,7 @@ let forkJoin = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
     |> reduce((. _, value) => Some(value), None)
     |> map((. value) => value->Belt.Option.getExn)
   })
-  |> toArrayO
+  |> takeArray
 }
 
 @gentype

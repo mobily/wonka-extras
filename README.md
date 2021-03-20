@@ -17,4 +17,7 @@ A collection of sources and operators for [Wonka](https://github.com/kitten/wonk
 - timeoutWith
 - find
 - distinctUntilChanged
-- toArrayO (abbreviation for toArray operator)
+- takeArray (as known as toArray operator)
+- mapTo
+- switchMapTo
+- concatMapTo
