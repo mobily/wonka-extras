@@ -1,14 +1,8 @@
 open Wonka
 open Wonka_types
 
-type behaviorSubjectT<'a> = {
-  source: sourceT<'a>,
-  next: 'a => unit,
-  complete: unit => unit,
-}
-
 @gentype
-let makeBehaviorSubject = (value: 'a): behaviorSubjectT<'a> => {
+let makeBehaviorSubject = (value: 'a): subjectT<'a> => {
   let subject = makeSubject()
   let previousValue = ref(value)
   let source = concat([fromValue(value), subject.source])
@@ -33,7 +27,7 @@ let forkJoin = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
     |> reduce((. _, value) => Some(value), None)
     |> map((. value) => value->Belt.Option.getExn)
   })
-  |> takeArray
+  |> flat
 }
 
 @gentype
@@ -60,4 +54,9 @@ let combineLatest = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
     )
   })
   |> skipWhile((. tuples) => Belt.Array.length(tuples) < length)
+}
+
+@gentype
+let timer = (ms: int): sourceT<int> => {
+  interval(ms) |> take(1)
 }
