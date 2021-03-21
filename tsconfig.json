@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "outDir": "dist/types",
+    "lib": ["esnext"],
+    "jsx": "react",
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": false,
+    "sourceMap": false,
+    "pretty": true
+  }
+}
