@@ -15,7 +15,20 @@ const build = (outfile, options) => {
           config: {
             babelrc: false,
             exclude: 'node_modules/**',
-            plugins: [curryGuaranteePlugin, 'closure-elimination', 'minify-dead-code-elimination'],
+            plugins: [
+              [
+                'module-resolver',
+                {
+                  root: ['./src'],
+                  alias: {
+                    'wonka/src/Wonka.bs.js': 'wonka',
+                  },
+                },
+              ],
+              curryGuaranteePlugin,
+              'closure-elimination',
+              'minify-dead-code-elimination',
+            ],
           },
         }),
       ],
