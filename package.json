@@ -1,23 +1,21 @@
 {
   "name": "@mobily/wonka-extras",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "source": "./src/WonkaExtras.bs.js",
-  "types": "./dist/types/src/WonkaExtras.d.ts",
+  "types": "./dist/types/WonkaExtras.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
-      "types": "./dist/types/src/WonkaExtras.d.ts",
-      "source": "./src/WonkaExtras.ts"
+      "types": "./dist/types/WonkaExtras.d.ts"
     },
     "./package.json": "./package.json"
   },
   "sideEffects": false,
   "files": [
-    "src",
+    "src/*.res",
     "dist",
     "*.md",
     "index.js.flow",
