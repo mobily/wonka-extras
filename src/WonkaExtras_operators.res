@@ -57,8 +57,6 @@ let find = (predicateFn: (. 'a) => bool): operatorT<'a, option<'a>> =>
   curry(source => {
     let shared = share(source)
     let subject = makeSubject()
-    // let next = uncurry1(subject.next)
-    // let complete = uncurry0(subject.complete)
 
     shared
     |> takeUntil(subject.source)
