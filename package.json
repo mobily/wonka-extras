@@ -1,17 +1,39 @@
 {
   "name": "@mobily/wonka-extras",
   "version": "0.1.0",
-  "main": "index.js",
   "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "source": "./src/WonkaExtras.bs.js",
+  "types": "./dist/types/src/WonkaExtras.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/src/WonkaExtras.d.ts",
+      "source": "./src/WonkaExtras.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "src",
+    "dist",
+    "*.md",
+    "index.js.flow",
+    "bsconfig.json",
+    "package.json"
+  ],
   "scripts": {
-    "build": "yarn rollup -c rollup.config.js && yarn generate:flow",
-    "clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
+    "build": "bash ./scripts/build.sh",
+    "esbuild": "node esbuild.config.js",
+    "clean": "rm -rf ./dist",
     "test": "yarn jest --coverage",
     "re:clean": "yarn bsb -clean-world",
     "re:build": "yarn bsb -make-world",
     "re:dev": "yarn bsb -make-world -w",
     "generate:flow": "node ./scripts/generate-flow-files.js",
-    "generate:contributors": "yarn all-contributors generate"
+    "postinstall": "bash ./scripts/postinstall.sh"
   },
   "keywords": [
     "wonka",
