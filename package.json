@@ -1,6 +1,6 @@
 {
   "name": "@mobily/wonka-extras",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -28,12 +28,12 @@
     "build": "bash ./scripts/build.sh",
     "esbuild": "node esbuild.config.js",
     "clean": "rm -rf ./dist",
-    "test": "yarn jest --coverage",
+    "test": "yarn install:test && yarn jest --coverage",
     "re:clean": "yarn bsb -clean-world",
     "re:build": "yarn bsb -make-world",
     "re:dev": "yarn bsb -make-world -w",
     "generate:flow": "node ./scripts/generate-flow-files.js",
-    "postinstall": "bash ./scripts/postinstall.sh"
+    "install:test": "bash ./scripts/install-test.sh"
   },
   "keywords": [
     "wonka",
@@ -67,7 +67,6 @@
     "gentype": "^3.44.0",
     "globby": "^11.0.2",
     "jest": "^26.6.3",
-    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.2.1",
     "reason-test-framework": "^0.3.2",
     "ts-jest": "^26.5.4",
