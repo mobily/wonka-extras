@@ -1,5 +1,6 @@
 type t<'a> = {
   spy: (. 'a) => unit,
+  calls: array<array<'a>>,
   toBeCalledWith: array<'a> => unit,
   toBeCalledTimes: int => unit,
   lastCalledWith: 'a => unit,
@@ -19,13 +20,12 @@ let makeSpy = (expect: TestFramework.Types.expectUtils<'a>) => {
     expect.value(spy->TestFramework.Mock.calls->getUnsafe(pred(n))->getUnsafe(0)).toEqual(value)
   }
   let toBeCalledWith = values => {
-    expect.value(
-      spy->TestFramework.Mock.calls->Belt.Array.map(value => Belt.Array.getUnsafe(value, 0)),
-    ).toEqual(values)
+    expect.value(spy->TestFramework.Mock.calls->map(value => getUnsafe(value, 0))).toEqual(values)
   }
 
   {
     spy: spy,
+    calls: spy->TestFramework.Mock.calls,
     toBeCalledWith: toBeCalledWith,
     toBeCalledTimes: toBeCalledTimes,
     lastCalledWith: lastCalledWith,
@@ -33,14 +33,22 @@ let makeSpy = (expect: TestFramework.Types.expectUtils<'a>) => {
   }
 }
 
-@val external setImmediate: ('a => unit) => unit = "setImmediate"
+type fakeTimer = [#modern | #legacy]
+
+@val external setImmediate: 'a => unit = "setImmediate"
 @scope("jest") @val external advanceTimersByTime: int => unit = "advanceTimersByTime"
-@scope("jest") @val external useFakeTimers: unit => unit = "useFakeTimers"
+@scope("jest") @val external useFakeTimers: fakeTimer => unit = "useFakeTimers"
 @scope("jest") @val external clearAllTimers: unit => unit = "clearAllTimers"
+@scope("jest") @val external runAllTimers: unit => unit = "runAllTimers"
+@scope("process") @val external nextTick: 'a => unit = "nextTick"
+
+let useFakeTimers = () => {
+  useFakeTimers(#legacy)
+}
 
 let flushPromises = fn => {
   open Js.Promise
-  make((~resolve, ~reject as _) => setImmediate(value => resolve(. value)))->then_(_ => {
+  make((~resolve, ~reject as _) => nextTick(resolve))->then_(_ => {
     fn()
     resolve(Js.undefined)
   }, _)->ignore
