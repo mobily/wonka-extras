@@ -17,3 +17,4 @@ lib/
 
 *.bs.js
 *.gen.tsx
+src/Playground.res
