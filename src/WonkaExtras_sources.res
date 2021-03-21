@@ -5,7 +5,7 @@ open Wonka_types
 let makeBehaviorSubject = (value: 'a): subjectT<'a> => {
   let subject = makeSubject()
   let previousValue = ref(value)
-  let source = concat([fromValue(value), subject.source])
+  let source = concat([fromValue(value) |> map((. _) => previousValue.contents), subject.source])
 
   let next = value => {
     if value != previousValue.contents {
