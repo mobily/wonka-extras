@@ -9,9 +9,6 @@
   "gentypeconfig": {
     "language": "typescript",
     "importPath": "relative",
-    "shims": {
-
-    },
     "debug": {
       "all": false
     },
@@ -19,7 +16,7 @@
   },
   "suffix": ".bs.js",
   "package-specs": {
-    "module": "commonjs",
+    "module": "es6",
     "in-source": true
   },
   "sources": [
