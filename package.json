@@ -26,12 +26,12 @@
     "build": "bash ./scripts/build.sh",
     "esbuild": "node esbuild.config.js",
     "clean": "rm -rf ./dist",
-    "test": "yarn install:test && yarn jest --coverage",
+    "test": "yarn build:test && yarn jest --coverage",
     "re:clean": "yarn bsb -clean-world",
     "re:build": "yarn bsb -make-world",
     "re:dev": "yarn bsb -make-world -w",
     "generate:flow": "node ./scripts/generate-flow-files.js",
-    "install:test": "bash ./scripts/install-test.sh"
+    "build:test": "bash ./scripts/build-test.sh"
   },
   "keywords": [
     "wonka",
