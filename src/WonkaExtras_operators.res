@@ -38,8 +38,6 @@ let reduce = (fn: (. 'b, 'a) => 'b, initialValue: 'b): operatorT<'a, 'b> =>
     shared |> scan(fn, initialValue) |> takeLast(1)
   })
 
-external curry2: ('a => 'a, . 'b, 'c) => 'a = "%identity"
-
 @gentype
 let timeoutWith = (rescueSource: sourceT<'b>, ms: int): operatorT<'a, 'b> =>
   curry(source => {
@@ -124,3 +122,4 @@ let concatMapTo = (sndSource: sourceT<'b>): operatorT<'a, 'b> =>
     let shared = share(source)
     shared |> concatMap((. _) => sndSource)
   })
+
