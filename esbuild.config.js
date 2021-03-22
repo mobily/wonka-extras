@@ -41,4 +41,5 @@ const build = (outfile, options) => {
 }
 
 build('index.js')
+build('index.min.js', { minify: true })
 build('index.mjs', { format: 'esm' })
