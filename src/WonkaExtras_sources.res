@@ -17,7 +17,6 @@ let makeBehaviorSubject = (value: 'a): subjectT<'a> => {
   {source: source, next: next, complete: subject.complete}
 }
 
-@gentype
 let forkJoin = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
   open WonkaExtras_operators
 
@@ -30,7 +29,6 @@ let forkJoin = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
   |> flat
 }
 
-@gentype
 let combineLatest = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
   let sources =
     sources->Belt.Array.mapWithIndexU((. index, source) =>
