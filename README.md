@@ -17,8 +17,10 @@ A collection of sources and operators for [Wonka](https://github.com/kitten/wonk
 - reduce
 - timeoutWith
 - find
+- distinct
 - distinctUntilChanged
 - flat
 - mapTo
 - switchMapTo
 - concatMapTo
+

@@ -97,6 +97,35 @@ let distinctUntilChanged = (comparatorFn: (. 'a, 'a) => bool): operatorT<'a, 'a>
   })
 
 @gentype
+let distinct = (extractFn: (. 'a) => 'b): operatorT<'a, 'a> =>
+  curry(source => {
+    let shared = share(source)
+
+    shared
+    |> scan((. acc, value) => {
+      let (arr, previousValue) = acc
+
+      switch previousValue {
+      | Some(previousValue) => (arr->Belt.Array.concat([previousValue]), Some(value))
+      | None => (arr, Some(value))
+      }
+    }, ([], None))
+    |> map((. values) => {
+      let (arr, currentValue) = values
+      (arr, currentValue->Belt.Option.getExn)
+    })
+    |> filter((. values) => {
+      let (arr, currentValue) = values
+      let extractedValue = extractFn(. currentValue)
+      !Belt.Array.someU(arr, (. value) => extractFn(. value) == extractedValue)
+    })
+    |> map((. values) => {
+      let (_, currentValue) = values
+      currentValue
+    })
+  })
+
+@gentype
 let flat = (source: sourceT<'a>): sourceT<array<'a>> => {
   let shared = share(source)
   shared |> reduce((. acc, value) => Belt.Array.concat(acc, [value]), [])
