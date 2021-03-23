@@ -58,3 +58,4 @@ let combineLatest = (sources: array<sourceT<'a>>): sourceT<array<'a>> => {
 let timer = (ms: int): sourceT<int> => {
   interval(ms) |> take(1)
 }
+
