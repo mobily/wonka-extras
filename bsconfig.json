@@ -1,6 +1,6 @@
 {
   "name": "@mobily/wonka-extras",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "namespace": false,
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "reason": {
@@ -38,4 +38,3 @@
   ],
   "ppx-flags": []
 }
-
