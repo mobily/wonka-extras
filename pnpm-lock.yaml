@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/node': ^18.7.23
   '@vitest/coverage-c8': ^0.23.4
   esbuild: ^0.15.10
   flowgen: ^1.20.1
@@ -19,6 +20,7 @@ dependencies:
   wonka: 6.1.0
 
 devDependencies:
+  '@types/node': 18.7.23
   '@vitest/coverage-c8': 0.23.4
   esbuild: 0.15.10
   flowgen: 1.20.1
@@ -28,7 +30,7 @@ devDependencies:
   import-sort-style-mobily: 0.2.0
   prettier: 2.7.1
   prettier-plugin-import-sort: 0.0.7_prettier@2.7.1
-  ts-node: 10.9.1_typescript@4.8.4
+  ts-node: 10.9.1_gbhfbbeqrol7fxixnzbkbuanxe
   typescript: 4.8.4
   vitest: 0.23.4
 
@@ -1679,7 +1681,7 @@ packages:
       is-number: 7.0.0
     dev: true
 
-  /ts-node/10.9.1_typescript@4.8.4:
+  /ts-node/10.9.1_gbhfbbeqrol7fxixnzbkbuanxe:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -1698,6 +1700,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
+      '@types/node': 18.7.23
       acorn: 8.8.0
       acorn-walk: 8.2.0
       arg: 4.1.3
