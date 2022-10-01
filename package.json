@@ -1,41 +1,33 @@
 {
   "name": "@mobily/wonka-extras",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./dist/types/WonkaExtras.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
-      "types": "./dist/types/WonkaExtras.d.ts"
+      "types": "./dist/types/index.d.ts"
     },
     "./package.json": "./package.json"
   },
   "sideEffects": false,
   "files": [
-    "src/*.res",
     "dist",
     "*.md",
     "index.js.flow",
-    "bsconfig.json",
     "package.json"
   ],
   "scripts": {
-    "build": "bash ./scripts/build.sh",
-    "esbuild": "node esbuild.config.js",
+    "build": "pnpm foy -c ./scripts/build.foyfile.ts",
     "clean": "rm -rf ./dist",
-    "test": "yarn build:test && yarn jest --coverage",
-    "re:clean": "yarn bsb -clean-world",
-    "re:build": "yarn bsb -make-world",
-    "re:dev": "yarn bsb -make-world -w",
-    "generate:flow": "node ./scripts/generate-flow-files.js",
-    "build:test": "bash ./scripts/build-test.sh"
+    "test": "pnpm vitest run --coverage",
+    "generate": "pnpm foy -c ./scripts/generate.foyfile.ts"
   },
   "keywords": [
     "wonka",
-    "rescript",
     "typescript",
     "observable",
     "iterable",
@@ -52,23 +44,20 @@
     "access": "public"
   },
   "dependencies": {
-    "wonka": "^4.0.15"
+    "wonka": ">=6.1.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
-    "babel-jest": "^26.6.3",
-    "babel-plugin-closure-elimination": "^1.3.2",
-    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "bs-platform": "^9.0.2",
-    "esbuild": "^0.9.6",
-    "flowgen": "^1.13.0",
-    "gentype": "^3.44.0",
+    "@vitest/coverage-c8": "^0.23.4",
+    "esbuild": "^0.15.10",
+    "flowgen": "^1.20.1",
+    "foy": "^0.2.17",
     "globby": "^11.0.2",
-    "jest": "^26.6.3",
-    "prettier": "^2.2.1",
-    "reason-test-framework": "^0.3.2",
-    "ts-jest": "^26.5.4",
-    "typescript": "^4.2.3"
+    "import-sort-style": "^6.0.0",
+    "import-sort-style-mobily": "^0.2.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-import-sort": "^0.0.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4",
+    "vitest": "^0.23.4"
   }
 }

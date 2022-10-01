@@ -4,17 +4,27 @@
     "emitDeclarationOnly": true,
     "rootDir": "./src",
     "baseUrl": ".",
-    "outDir": "dist/types",
     "lib": ["esnext"],
-    "jsx": "react",
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "esnext",
     "strict": true,
-    "noImplicitAny": false,
-    "noUnusedParameters": false,
     "sourceMap": false,
-    "pretty": true
-  }
+    "pretty": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": [
+    "./__tests__/**/*",
+    "./src/**/index.ts"
+  ],
 }

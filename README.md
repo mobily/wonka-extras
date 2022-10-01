@@ -6,7 +6,6 @@ A collection of sources and operators for [Wonka](https://github.com/kitten/wonk
 
 - makeBehaviorSubject
 - forkJoin
-- combineLatest
 - timer
 
 ### Operators
@@ -16,11 +15,5 @@ A collection of sources and operators for [Wonka](https://github.com/kitten/wonk
 - endWith
 - reduce
 - timeoutWith
-- find
 - distinct
 - distinctUntilChanged
-- flat
-- mapTo
-- switchMapTo
-- concatMapTo
-
