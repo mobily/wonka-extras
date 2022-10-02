@@ -5,7 +5,8 @@ import {
   concat,
   fromValue,
   interval,
-  make,
+  makeSubject,
+  map,
   pipe,
   share,
   take,
@@ -22,34 +23,25 @@ export const forkJoin = <T extends Source<any>[]>(...sources: T): Source<TypeOfS
 }
 
 export const makeBehaviorSubject = <T>(value: T): Subject<T> => {
-  let next: Subject<T>['next'] | void
-  let complete: Subject<T>['complete'] | void
   let previousValue = value
 
-  const source = concat<T>([
-    fromValue(previousValue),
-    make(observer => {
-      next = observer.next
-      complete = observer.complete
-
-      return () => {
-        // noop
-      }
-    }),
-  ])
+  const subject = makeSubject<T>()
+  const initialValue = pipe(
+    fromValue(value),
+    map(_ => previousValue),
+  )
+  const source = concat([initialValue, subject.source])
 
   return {
     source: share(source),
     next(value: T) {
-      if (next) {
+      if (value !== previousValue) {
         previousValue = value
-        next(value)
+        subject.next(value)
       }
     },
     complete() {
-      if (complete) {
-        complete()
-      }
+      subject.complete()
     },
   }
 }
