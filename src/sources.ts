@@ -1,6 +1,5 @@
 import {
   Source,
-  Subject,
   combine,
   concat,
   fromValue,
@@ -12,7 +11,7 @@ import {
   take,
 } from 'wonka'
 
-import { TypeOfSourceArray } from './types'
+import { BehaviorSubject, TypeOfSourceArray } from './types'
 
 export const timer = (ms: number) => {
   return pipe(interval(ms), take(1))
@@ -22,7 +21,7 @@ export const forkJoin = <T extends Source<any>[]>(...sources: T): Source<TypeOfS
   return pipe(combine(...sources), take(1))
 }
 
-export const makeBehaviorSubject = <T>(value: T): Subject<T> => {
+export const makeBehaviorSubject = <T>(value: T): BehaviorSubject<T> => {
   let previousValue = value
 
   const subject = makeSubject<T>()
@@ -42,6 +41,9 @@ export const makeBehaviorSubject = <T>(value: T): Subject<T> => {
     },
     complete() {
       subject.complete()
+    },
+    get value() {
+      return previousValue
     },
   }
 }
