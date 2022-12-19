@@ -1,15 +1,4 @@
-import {
-  Source,
-  combine,
-  concat,
-  fromValue,
-  interval,
-  makeSubject,
-  map,
-  pipe,
-  share,
-  take,
-} from 'wonka'
+import { Source, combine, concat, fromValue, interval, makeSubject, map, pipe, take } from 'wonka'
 
 import { BehaviorSubject, TypeOfSourceArray } from './types'
 
