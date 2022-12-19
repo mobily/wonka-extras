@@ -32,7 +32,7 @@ export const makeBehaviorSubject = <T>(value: T): BehaviorSubject<T> => {
   const source = concat([initialValue, subject.source])
 
   return {
-    source: share(source),
+    source,
     next(value: T) {
       if (value !== previousValue) {
         previousValue = value
