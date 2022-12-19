@@ -1,6 +1,6 @@
 {
   "name": "@mobily/wonka-extras",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.mjs",
@@ -44,7 +44,7 @@
     "access": "public"
   },
   "dependencies": {
-    "wonka": ">=6.1.0"
+    "wonka": ">=6.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.7.23",
